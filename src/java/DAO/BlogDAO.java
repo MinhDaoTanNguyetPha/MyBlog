@@ -46,7 +46,7 @@ public class BlogDAO {
                 int blogID = rs.getInt("ID");
                 String header = rs.getString("Header");
                 int categoryID = rs.getInt("CategoryID");
-                String content = rs.getString("[Content]");
+                String content = rs.getString("Content");
                 Timestamp date = rs.getTimestamp("Date");
                 String img = rs.getString("Img");
                 Blog b = new Blog(blogID, header, new DAOCategory().selectCategoryByID(categoryID), content, date, img);
