@@ -8,7 +8,6 @@ package DAO;
 import DBContext.DBContext;
 import entity.Category;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -30,7 +29,16 @@ public class DAOCategory {
         }
     }
 
-    public List<Category> getCategory(int pageNo, int resultPerPage) {
+    public List<Category> getCategory() {
+        try {
+            return getCategory(1,getNumberOfRecord());
+        } catch (Exception ex) {
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    private List<Category> getCategory(int pageNo, int resultPerPage) {
         try {
             Connection conn;
             conn = new DBContext().getConnection();

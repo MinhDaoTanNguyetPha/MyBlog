@@ -60,7 +60,7 @@ public class ContactServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOCategory catdao = new DAOCategory();
-        List<Category> catlist = catdao.getCategory(1, 5);
+        List<Category> catlist = catdao.getCategory();
         request.setAttribute("Catelist", catlist);
         getServletContext().getRequestDispatcher("/webpage/Contact.jsp").forward(request, response);
     }

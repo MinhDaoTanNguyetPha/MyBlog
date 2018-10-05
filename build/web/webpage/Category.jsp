@@ -33,14 +33,14 @@
             <%
                 }
             %>
-            <form id="next" action="${pageContext.request.contextPath}/HomeServlet" method="post">
+<!--            <form id="next" action="${pageContext.request.contextPath}/HomeServlet" method="post">
                 <input type="text" class="categoryID" value="Next" name="LinkDescription"/>
                 <a href="#" onclick="submitForm('next');">Next</a>
             </form>
             <form id="previous" action="${pageContext.request.contextPath}/HomeServlet" method="post">
                 <input type="text" class="categoryID" value="previous" name="LinkDescription"/>
                 <a href="#" onclick="submitForm('previous');">Previous</a>
-            </form>
+            </form>-->
         </ul>
     </body>
 </html>
