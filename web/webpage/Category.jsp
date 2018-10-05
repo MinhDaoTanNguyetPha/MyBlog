@@ -25,7 +25,7 @@
                 for (Category elem : x) {
             %>       
             <li class="cateli">
-                <form id="<%=elem.getID()%>" action="${request.contextPath}/CategoryServlet" method="get">
+                <form id="<%=elem.getID()%>" action="${pageContext.request.contextPath}/CategoryServlet" method="get">
                     <input type="text" class="categoryID" value="<%=elem.getID()%>" name="categoryID"/>
                     <a href="#" onclick="submitForm('<%=elem.getID()%>');"><%=elem.getCategoryName()%></a>
                 </form>
