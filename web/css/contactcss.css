@@ -1,0 +1,56 @@
+.table1{
+    height: 160%;
+    margin-top: 10%;
+    margin-left: 10%;
+}
+
+fieldset{
+    border-style: dotted;
+    width: 45%;
+    height: 200%;
+}
+
+legend{
+    width: 40%;
+    background-color: #9e1d1f;
+    color: white;
+    font-family: serif;
+    text-align: center;
+}
+
+table{
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+td{
+    font-family: serif;
+    text-align: right;
+    padding-top: 2%;
+    margin: 2%;
+}
+
+input {
+   
+    width: 100%;
+}
+
+textarea{
+    display: block;
+    width: 100%;
+}
+
+button{
+  margin-right: -400%;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #9e1d1f;
+  color: white;
+  width: 86%;
+  height: 20px;
+}
+
+.MessageHandler{
+    padding-bottom: 20%;
+}
+
