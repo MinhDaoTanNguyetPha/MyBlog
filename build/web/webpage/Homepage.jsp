@@ -25,9 +25,9 @@
                     for (Blog elem : x) {
                 %>
                 <li class="cateli">
-                    <form id="<%=elem.getID()%>" action="../CategoryServlet" method="post">
+                    <form id="<%="b"+elem.getID()%>" action="${pageContext.request.contextPath}/CategoryServlet" method="post">
                         <input type="text" class="categoryID" value="<%=elem.getID()%>" name="categoryID"/>
-                        <a href="#" onclick="submitForm('<%=elem.getID()%>');"><%=elem.getHeader()%></a>
+                        <a href="#" onclick="submitForm('<%="b"+elem.getID()%>');"><%=elem.getHeader()%></a>
                     </form>
                 </li>
                 <% } %>
