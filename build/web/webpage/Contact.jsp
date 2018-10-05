@@ -43,7 +43,7 @@
                     </tr>
                     <tr>
                         <td class="errorMessage">
-                        <%=(String)request.getAttribute("verifyingFailed")%>
+                        <%=(String)request.getAttribute("verifyingFailed")==null?"":(String)request.getAttribute("verifyingFailed")%>
                         </td>
                     </tr>
                     </table>

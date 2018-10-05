@@ -89,6 +89,7 @@ public class ContactServlet extends HttpServlet {
             try {
                 conDAO.insertContact(submittedContact);
             } catch (Exception ex) {
+                request.setAttribute("verifyingFailed", "Exception occurs");
                 Logger.getLogger(ContactServlet.class.getName()).log(Level.SEVERE, null, ex);
                 getServletContext().getRequestDispatcher("/webpage/Contact.jsp").forward(request, response);
             }
@@ -120,6 +121,11 @@ public class ContactServlet extends HttpServlet {
         if(email==null) {
             request.setAttribute("verifyingFailed", "Email can't be empty");
             return null;
+        } else {
+            if(email.split("@").length!=2) {
+                request.setAttribute("verifyingFailed", "Email is in wrong format");
+                return null;
+            }
         }
         String phone = request.getParameter("phone");
         if(phone==null) {
