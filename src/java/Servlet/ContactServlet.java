@@ -5,11 +5,15 @@
  */
 package Servlet;
 
+import DAO.ContactDAO;
 import DAO.DAOCategory;
 import entity.Category;
+import entity.Contact;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -76,7 +80,22 @@ public class ContactServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        DAOCategory catdao = new DAOCategory();
+        List<Category> catlist = catdao.getCategory();
+        request.setAttribute("Catelist", catlist);
+        Contact submittedContact = verifyContact(request);
+        ContactDAO conDAO = new ContactDAO();
+        if(submittedContact!=null) {
+            try {
+                conDAO.insertContact(submittedContact);
+            } catch (Exception ex) {
+                Logger.getLogger(ContactServlet.class.getName()).log(Level.SEVERE, null, ex);
+                getServletContext().getRequestDispatcher("/webpage/Contact.jsp").forward(request, response);
+            }
+            getServletContext().getRequestDispatcher("/webpage/ContactSuccess.jsp").forward(request, response);
+        } else {
+            getServletContext().getRequestDispatcher("/webpage/Contact.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -89,4 +108,35 @@ public class ContactServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private Contact verifyContact(HttpServletRequest request) {
+//        Contact tmp = null;
+//        tmp = new Contact(0, name, email, phone, company, Message);
+        String name = request.getParameter("name");
+        if(name==null) {
+            request.setAttribute("verifyingFailed", "Name can't be empty");
+            return null;
+        }
+        String email = request.getParameter("email");
+        if(email==null) {
+            request.setAttribute("verifyingFailed", "Email can't be empty");
+            return null;
+        }
+        String phone = request.getParameter("phone");
+        if(phone==null) {
+            request.setAttribute("verifyingFailed", "Phone can't be empty");
+            return null;
+        }
+        String company = request.getParameter("company");
+        if(company==null) {
+            request.setAttribute("verifyingFailed", "Company can't be empty");
+            return null;
+        }
+        String message = request.getParameter("message");
+        if(message==null) {
+            request.setAttribute("verifyingFailed", "Message can't be empty");
+            return null;
+        }
+        request.setAttribute("verifyingFailed", "");
+        return new Contact(0, name, email, phone, company, message);
+    }
 }

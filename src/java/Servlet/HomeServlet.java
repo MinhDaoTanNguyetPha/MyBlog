@@ -13,12 +13,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 /**
  *
@@ -43,7 +40,7 @@ public class HomeServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeServlet</title>");            
+            out.println("<title>Servlet HomeServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HomeServlet at " + request.getContextPath() + "</h1>");
@@ -67,7 +64,7 @@ public class HomeServlet extends HttpServlet {
         BlogDAO blogdao = new BlogDAO();
         List<Blog> blogList = blogdao.getRecentBlogs(1);
         prepareHomePage(request, response, blogList.get(0).getID());
-        
+
 //        response.sendRedirect("/MyBlog/webpage/Homepage.jsp");
     }
 
@@ -82,35 +79,15 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String desc = request.getParameter("LinkDescription");
-        HttpSession session = request.getSession();
-        int page = (Integer)session.getAttribute("pageNumber");
-        if(desc.equalsIgnoreCase("Next")){
-            page = page + 1;
-        }else{
-            page = page - 1; 
-        }
-        if(page==0){
-            page = 1;
-        }
-        else if(page>(new DAOCategory().getNumberOfRecord()/5)){
-            page--;
-        }
-        int currentBlogID=0;
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cooky : cookies) {
-            if(cooky.getName().equalsIgnoreCase("currentBlogID")) {
-                currentBlogID=Integer.parseInt(cooky.getValue());
-            }
-        }
-        if(currentBlogID==0) {
-            BlogDAO blogdao = new BlogDAO();
-            List<Blog> blogList = blogdao.getRecentBlogs(1);
-            currentBlogID = blogList.get(0).getID();
+        int currentBlogID;
+        try {
+            currentBlogID = Integer.parseInt(request.getParameter("blogID"));
+        } catch (NumberFormatException ex) {
+            currentBlogID = new DAOCategory().getCategory().get(0).getID();
         }
         prepareHomePage(request, response, currentBlogID);
     }
-    
+
     private void prepareHomePage(HttpServletRequest request, HttpServletResponse response, int currentBlogID) throws IOException, ServletException {
         DAOCategory catdao = new DAOCategory();
         List<Category> catlist = catdao.getCategory();
@@ -118,15 +95,8 @@ public class HomeServlet extends HttpServlet {
         BlogDAO blogdao = new BlogDAO();
         Blog currentBlog = blogdao.loadBlogByID(currentBlogID);
         request.setAttribute("currentBlog", currentBlog);
-        List<Blog> blogList = blogdao.getRecentBlogs(1);
+        List<Blog> blogList = blogdao.getRecentBlogs(3);
         request.setAttribute("Bloglist", blogList);
-//        HttpSession session = request.getSession();
-//        session.setAttribute("pageNumber", catePage);
-//        session.setAttribute("currentBlog", blogList.get(0));
-//        Cookie[] cookies = request.getCookies();
-        Cookie cookie = new Cookie("currentBlogID", blogList.get(0).getID()+"");
-        cookie.setMaxAge(60 * 60 * 24);
-        response.addCookie(cookie);
         getServletContext().getRequestDispatcher("/webpage/Homepage.jsp").forward(request, response);
     }
 

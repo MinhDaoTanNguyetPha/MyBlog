@@ -24,22 +24,27 @@
                         <legend>All fields are required</legend>
                     <table>
                     <tr>
-                        <td>Name:</td><td><input type="text"/></td>
+                        <td>Name:</td><td><input type="text" name="name"/></td>
                     </tr>
                     <tr>
-                        <td>Email:</td><td><input type="email"/></td>
+                        <td>Email:</td><td><input type="email" name="email"/></td>
                     </tr>
                     <tr>
-                        <td>Phone:</td><td><input type="text"/></td>
+                        <td>Phone:</td><td><input type="text" name="phone"/></td>
                     </tr>
                     <tr>
-                        <td>Company:</td><td><input type="text"/></td>
+                        <td>Company:</td><td><input type="text" name="company"/></td>
                     </tr>
                     <tr>
-                        <td class="MessageHandler">Message:</td><td><textarea rows="4" cols="30"></textarea></td>
+                        <td class="MessageHandler">Message:</td><td><textarea rows="4" cols="30" name="message"></textarea></td>
                     </tr>
                     <tr>
                         <td class="buttonHeight"><button>Send</button></td>
+                    </tr>
+                    <tr>
+                        <td class="errorMessage">
+                        <%=(String)request.getAttribute("verifyingFailed")%>
+                        </td>
                     </tr>
                     </table>
                     </fieldset>
