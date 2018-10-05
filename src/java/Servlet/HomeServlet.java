@@ -83,7 +83,7 @@ public class HomeServlet extends HttpServlet {
         try {
             currentBlogID = Integer.parseInt(request.getParameter("blogID"));
         } catch (NumberFormatException ex) {
-            currentBlogID = new DAOCategory().getCategory().get(0).getID();
+            currentBlogID = new BlogDAO().getRecentBlogs(1).get(0).getID();
         }
         prepareHomePage(request, response, currentBlogID);
     }
@@ -109,5 +109,5 @@ public class HomeServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    //Người theo ánh trăng
 }
