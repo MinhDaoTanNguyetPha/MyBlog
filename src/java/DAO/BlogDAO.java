@@ -39,6 +39,7 @@ public class BlogDAO {
             String query = "select * from Blog\n"
                     + "where ID = ?";
             PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, ID);
             List<Blog> a = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
