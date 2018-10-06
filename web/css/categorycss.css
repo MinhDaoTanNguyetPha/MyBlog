@@ -3,7 +3,15 @@
 }
 
 .cateli{
-   
+   padding-top: 2%;
+}
+
+span{
+    background-image: url("../img/img01.jpg");
+}
+
+h3{
+    font-family: "Arial", san-serif;
 }
 
 .categoryID{

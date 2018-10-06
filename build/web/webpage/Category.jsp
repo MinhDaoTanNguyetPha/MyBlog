@@ -26,7 +26,7 @@
             %>       
             <li class="cateli">
                 <form id="<%="c"+elem.getID()%>" action="${pageContext.request.contextPath}/CategoryServlet" method="get">
-                    <input type="text" class="categoryID" value="<%=elem.getID()%>" name="categoryID"/>
+                    <span></span><input type="text" class="categoryID" value="<%=elem.getID()%>" name="categoryID"/>
                     <a href="#" onclick="submitForm('<%="c"+elem.getID()%>');"><%=elem.getCategoryName()%></a>
                 </form>
             </li>

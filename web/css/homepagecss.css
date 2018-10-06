@@ -5,6 +5,10 @@
     
 }
 
+body{
+    background-image: url("../img/img04.jpg");
+}
+
 #cgd2{
     height: 100px;
     width: 33.33%;
