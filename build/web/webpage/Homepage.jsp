@@ -20,6 +20,7 @@
         </div>
         <div >
             <div id="cgd">
+                <!--Doan duoi xoa di nhe-->
                 <%
                     List<Blog> x = (List<Blog>) request.getAttribute("Bloglist");
                     for (Blog elem : x) {
@@ -31,7 +32,13 @@
                     </form>
                 </li>
                 <% } %>
-                <jsp:include page="footer.jsp"></jsp:include>
+                <!--Doan tren xoa di nhe-->
+                <%
+                    Blog b = (Blog)request.getAttribute("currentBlog");
+                %>
+                <img src="<%=b.getImg()%>">
+                <%=b.getHeader()%>
+                <%=b.getContent()%>
             </div>
         </div>
         <div id="cgd2">
@@ -39,5 +46,6 @@
             <jsp:include page="Category.jsp"></jsp:include>
 
         </div>
+            <div><jsp:include page="footer.jsp"></jsp:include></div>
 </body>
 </html>
